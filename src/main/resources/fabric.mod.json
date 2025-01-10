@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "lowrain",
+  "version": "${version}",
+
+  "name": "LowVolumeRain",
+  "description": "Decreases the volume of the rain sfx.",
+  "authors": [
+    "Lukiiy"
+  ],
+  "contact": {
+    "sources": "https://github.com/Lukiiy/LowVolumeRain",
+    "issues": "https://github.com/Lukiiy/LowVolumeRain/issues"
+  },
+
+  "license": "MIT",
+  "icon": "assets/lowrain/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "me.lukiiy.lowrain.LowVolumeRain"
+    ]
+  },
+  "mixins": [
+    "lowrain.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "minecraft": "1.0.0-beta.7.3"
+  },
+  "suggests": {}
+}

@@ -8,6 +8,7 @@ public class LowVolumeRain implements ModInitializer {
     public static final String ID = "lowrain";
     public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 
-    @Override
-    public void onInitialize() {}
+    public static float Volume = 0.025f;
+
+    @Override public void onInitialize() {}
 }

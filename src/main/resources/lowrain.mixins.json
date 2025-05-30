@@ -3,11 +3,8 @@
   "minVersion": "0.8",
   "package": "me.lukiiy.lowrain.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
   "client": [
-    "DecreaseVolumeMixin",
-    "ClientMixin"
+    "DecreaseVolumeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

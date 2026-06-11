@@ -20,7 +20,7 @@ val yarnMappings = project.property("yarn_mappings")!!
 
 loom {
     gluedMinecraftJar()
-    customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/$minecraftVersion.json")
+    customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/$minecraft.json")
     intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
 }
 

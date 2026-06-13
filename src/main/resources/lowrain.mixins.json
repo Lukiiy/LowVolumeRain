@@ -4,7 +4,8 @@
   "package": "me.lukiiy.lowrain.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "DecreaseVolumeMixin"
+    "DecreaseVolumeMixin",
+    "MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1

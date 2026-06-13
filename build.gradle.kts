@@ -1,6 +1,6 @@
 plugins {
-    id("babric-loom") version "1.5-SNAPSHOT"
-    id("maven-publish")
+    id("fabric-loom") version "1.17-SNAPSHOT"
+    id("ploceus") version "1.17-SNAPSHOT"
 }
 
 val archivesBaseName = rootProject.property("name")!!.toString().lowercase()
@@ -8,29 +8,22 @@ val archivesBaseName = rootProject.property("name")!!.toString().lowercase()
 group = rootProject.property("group")!!
 version = rootProject.property("version")!!
 
-base.archivesName.set(archivesBaseName)
+base.archivesName.set("$archivesBaseName-ornithe")
 
-repositories {
-    maven("https://maven.glass-launcher.net/babric")
-}
+val minecraft = project.property("minecraft_version")!!.toString()
+val loader = project.property("loader_version")!!.toString()
+val featherBuild = project.property("feather_build")!!.toString()
 
-val minecraft = project.property("minecraft_version")!!
-val loader = project.property("loader_version")!!
-val yarnMappings = project.property("yarn_mappings")!!
-
-loom {
-    gluedMinecraftJar()
-    customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/$minecraft.json")
-    intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
+ploceus {
+    setIntermediaryGeneration(2)
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:$minecraft")
-    mappings("babric:barn:$yarnMappings:v2")
-    modImplementation("babric:fabric-loader:$loader")
+    mappings(ploceus.featherMappings(featherBuild))
+    modImplementation("net.fabricmc:fabric-loader:$loader")
 
-    implementation("org.slf4j:slf4j-api:1.8.0-beta4")
-    implementation("org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0")
+    ploceus.dependOsl(project.property("osl_version")!!.toString())
 }
 
 tasks {
@@ -53,5 +46,6 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(8))
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+
     withSourcesJar()
 }

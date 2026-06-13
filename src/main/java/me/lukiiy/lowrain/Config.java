@@ -14,7 +14,7 @@ public class Config {
     private final String modName;
 
     public Config(String fileName, String modName) {
-        File configDir = new File(Minecraft.getRunDirectory(), "config");
+        File configDir = new File(Minecraft.getWorkingDirectory(), "config");
         if (!configDir.exists()) configDir.mkdirs();
 
         this.file = new File(configDir, fileName);

@@ -9,7 +9,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-base.archivesName.set(project.property("name").toString())
+base.archivesName.set(project.property("named").toString())
 ploceus.setIntermediaryGeneration(2)
 
 version = project.property("version").toString()

@@ -1,35 +1,39 @@
 plugins {
-    id("fabric-loom") version "1.17-SNAPSHOT"
-    id("ploceus") version "1.17-SNAPSHOT"
+    java
+    id("fabric-loom") version "1.19.3"
+    id("ploceus") version "1.19.1"
 }
 
-val archivesBaseName = rootProject.property("name")!!.toString().lowercase()
-
-group = rootProject.property("group")!!
-version = rootProject.property("version")!!
-
-base.archivesName.set("$archivesBaseName-ornithe")
-
-val minecraft = project.property("minecraftVer")!!.toString()
-val loader = project.property("loaderVer")!!.toString()
-val featherBuild = project.property("feather_build")!!.toString()
-
-ploceus {
-    setIntermediaryGeneration(2)
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
+
+base.archivesName.set(project.property("name").toString())
+ploceus.setIntermediaryGeneration(2)
+
+version = project.property("version").toString()
+group = project.property("group").toString()
 
 dependencies {
-    minecraft("com.mojang:minecraft:$minecraft")
-    mappings(ploceus.featherMappings(featherBuild))
-    modImplementation("net.fabricmc:fabric-loader:$loader")
+    minecraft("com.mojang:minecraft:${property("minecraftVer")}")
+    modImplementation("net.fabricmc:fabric-loader:${property("loaderVer")}")
 
-    ploceus.dependOsl(project.property("osl_version")!!.toString())
+    clientExceptions(ploceus.raven(project.property("clientRaven").toString(), "client"))
+    serverExceptions(ploceus.raven(project.property("serverRaven").toString(), "server"))
+    clientSignatures(ploceus.sparrow(project.property("clientSparrow").toString(), "client"))
+    serverSignatures(ploceus.sparrow(project.property("serverSparrow").toString(), "server"))
+    clientNests(ploceus.nests(project.property("clientNests").toString(), "client"))
+    serverNests(ploceus.nests(project.property("serverNests").toString(), "server"))
+    mappings(ploceus.featherMappings(project.property("feather").toString()))
+
+    ploceus.dependOsl(project.property("oslVer").toString())
 }
 
 tasks {
     jar {
         from("LICENSE") {
-            rename { "${it}_${archivesBaseName}" }
+            rename { "${it}_${base.archivesName.get()}" }
         }
     }
 
@@ -37,15 +41,7 @@ tasks {
         inputs.property("version", project.version)
 
         filesMatching("fabric.mod.json") {
-            expand(mapOf("version" to project.version))
+            expand("version" to project.version)
         }
     }
-}
-
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(8))
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-
-    withSourcesJar()
 }

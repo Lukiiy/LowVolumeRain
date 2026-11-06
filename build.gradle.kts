@@ -10,8 +10,8 @@ version = rootProject.property("version")!!
 
 base.archivesName.set("$archivesBaseName-ornithe")
 
-val minecraft = project.property("minecraft_version")!!.toString()
-val loader = project.property("loader_version")!!.toString()
+val minecraft = project.property("minecraftVer")!!.toString()
+val loader = project.property("loaderVer")!!.toString()
 val featherBuild = project.property("feather_build")!!.toString()
 
 ploceus {

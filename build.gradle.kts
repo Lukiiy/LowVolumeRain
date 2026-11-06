@@ -14,9 +14,9 @@ repositories {
     maven("https://maven.glass-launcher.net/babric")
 }
 
-val minecraft = project.property("minecraft_version")!!
-val loader = project.property("loader_version")!!
-val yarnMappings = project.property("yarn_mappings")!!
+val minecraft = project.property("minecraftVer")!!
+val loader = project.property("loaderVer")!!
+val yarnMappings = project.property("yarnMappings")!!
 
 loom {
     gluedMinecraftJar()
